@@ -4,9 +4,9 @@ require "dotenv/load"
 
 pp "Hi! Where you at?"
 
-#user_loc = gets.chomp
+user_loc = gets.chomp
 
-user_loc = "Chicago Booth Harper Center" 
+#user_loc = "Chicago Booth Harper Center" 
 
 # pp user_loc
 
@@ -18,13 +18,13 @@ json_returned = JSON.parse(http_returned)
 
 # Use parsed JSON to extract nested location information.  Grag latitude and longitude.
 
-lat_loc = json_returned.fetch("results").at(0).fetch("navigation_points").at(0).fetch("location").fetch("latitude")
+lat_loc = json_returned.fetch("results").at(0).fetch("geometry").fetch("location").fetch("lat")
 #pp lat_loc
 
-long_loc = json_returned.fetch("results").at(0).fetch("navigation_points").at(0).fetch("location").fetch("longitude")
+long_loc = json_returned.fetch("results").at(0).fetch("geometry").fetch("location").fetch("lng")
 #pp long_loc
 
-# pp gmaps_url
+#pp gmaps_url
 
 # Acquire and parse current and hourly weather info
 pirate_url = "https://api.pirateweather.net/forecast/#{ENV.fetch("PIRATE_KEY")}/#{lat_loc},#{long_loc}"
